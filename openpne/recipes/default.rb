@@ -14,7 +14,7 @@ dbpass = node[:deploy][:openpne][:database][:password]
 dbhost = node[:deploy][:openpne][:database][:host]
 dbname = node[:deploy][:openpne][:database][:database]
 mail_domain = node[:deploy][:openpne][:mail_domain] || node[:domain]
-basee_url = node[:deploy][:openpne][:base_url] || "https://#{node[:fqdn]}"
+base_url = node[:deploy][:openpne][:base_url] || "https://#{node[:fqdn]}"
 
 %w[OpenPNE.yml ProjectConfiguration.class.php].each do |file|
 	#	execute 'move config' do
