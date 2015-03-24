@@ -7,7 +7,14 @@
 # All rights reserved - Do Not Redistribute
 #
 
-openpnedir=node[:deploy][:openpne][:deploy_to]+'/current'
+openpnedir = node[:deploy][:openpne][:deploy_to]+'/current'
+dbname = node[:deploy][:openpne][:database][:database]
+dbuser = node[:deploy][:openpne][:database][:username]
+dbpass = node[:deploy][:openpne][:database][:password]
+dbhost = node[:deploy][:openpne][:database][:host]
+dbname = node[:deploy][:openpne][:database][:database]
+openpne_admin_email = node[:deploy][:openpne][:admin_email] 
+openpne_url = node[:deploy][:openpne][:site_url] 
 
 %w[OpenPNE.yml ProjectConfiguration.class.php].each do |file|
 	execute 'move config' do
@@ -21,5 +28,6 @@ end
 
 execute 'openpne setup' do
 	command <<-EOS
+#{openpnedir}/symfony openpne:fast-install --dbms=mysql --dbuser=#{dbuser} --dbpassword=#{dbpass} --dbhost=#{dbhost} --dbname=#{dbname} --non-recreate-db
 EOS
 end
