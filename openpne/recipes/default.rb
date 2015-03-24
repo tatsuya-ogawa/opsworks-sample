@@ -11,7 +11,7 @@ openpnedir=node[:deploy][:openpne][:deploy_to]+'/current'
 
 %w[OpenPNE.yml ProjectConfiguration.class.php].each do |file|
 	execute 'move config' do
-		code <<-EOS
+		command <<-EOS
 		if[ -f #{openpnedir}/config/#{file}.sample]; then
 			mv #{openpnedir}/config/#{file}.sample #{openpnedir}/config/#{file}
 		fi
@@ -20,6 +20,6 @@ EOS
 end
 
 execute 'openpne setup' do
-	code <<-EOS
+	command <<-EOS
 EOS
 end
