@@ -27,6 +27,7 @@ basee_url = node[:deploy][:openpne][:base_url] || "https://#{node[:fqdn]}"
 	template "#{openpnedir}/config/#{file}" do
 		source "#{file}.erb"	
 		mode '0644'
+		variables({:base_rul=>base_url,:mail_domain=>mail_domain})
 	end
 end
 
