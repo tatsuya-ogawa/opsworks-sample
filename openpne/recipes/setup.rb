@@ -43,4 +43,8 @@ end
 	end
 end
 
-
+execute 'openpne update' do
+	command <<-EOS
+#{openpnedir}/symfony openpne:migrate 
+EOS
+end
