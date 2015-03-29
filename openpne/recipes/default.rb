@@ -21,6 +21,9 @@ variables={
 			:mail_domain=>mail_domain,
 }
 
+if node[:deploy][:openpne][:mail_smtp_host] then
+	variables[:mail_smtp_host]=node[:deploy][:openpne][:mail_smtp_host]
+end
 if node[:deploy][:openpne][:mail_smtp_config] then
 	variables[:mail_smtp_config]=node[:deploy][:openpne][:mail_smtp_config]
 end
