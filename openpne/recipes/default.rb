@@ -16,6 +16,15 @@ dbname = node[:deploy][:openpne][:database][:database]
 mail_domain = node[:deploy][:openpne][:mail_domain] || node[:domain]
 base_url = node[:deploy][:openpne][:base_url] || "https://#{node[:fqdn]}"
 
+variables={
+			:base_url=>base_url,
+			:mail_domain=>mail_domain,
+}
+
+if node[:deploy][:openpne][:mail_smtp_config] then
+	variables[:mail_smtp_config]=node[:deploy][:openpne][:mail_smtp_config]
+end
+
 %w[OpenPNE.yml ProjectConfiguration.class.php].each do |file|
 	#	execute 'move config' do
 	#		command <<-EOS
@@ -27,7 +36,7 @@ base_url = node[:deploy][:openpne][:base_url] || "https://#{node[:fqdn]}"
 	template "#{openpnedir}/config/#{file}" do
 		source "#{file}.erb"	
 		mode '0644'
-		variables({:base_url=>base_url,:mail_domain=>mail_domain})
+		variables(variables)
 	end
 end
 
